@@ -1,15 +1,15 @@
 import matplotlib.pyplot as plt
 import networkx as nx
-import pydot
 from networkx.drawing.nx_pydot import graphviz_layout
 
 class Node:
-    def __init__(self, data):
+    def __init__(self, data, depth=0):
         self.data = data
         self.color = 'RED'  # New nodes are always red
         self.left = None
         self.right = None
         self.parent = None
+        self.depth = depth  # Track the depth of the node
 
 class RedBlackTree:
     def __init__(self):
@@ -32,6 +32,10 @@ class RedBlackTree:
         right_child.left = node
         node.parent = right_child
 
+        # Update depths after rotation
+        right_child.depth = node.depth
+        node.depth += 1
+
     def rotate_right(self, node):
         left_child = node.left
         node.left = left_child.right
@@ -46,6 +50,10 @@ class RedBlackTree:
             node.parent.left = left_child
         left_child.right = node
         node.parent = left_child
+
+        # Update depths after rotation
+        left_child.depth = node.depth
+        node.depth += 1
 
     def fix_insert(self, node):
         while node != self.root and node.parent.color == 'RED':
@@ -86,15 +94,18 @@ class RedBlackTree:
 
         parent = None
         current = self.root
+        depth = 0  # Keep track of the depth of the current node
 
         while current != self.NIL_LEAF:
             parent = current
+            depth += 1  # Increment depth as we move down the tree
             if new_node.data < current.data:
                 current = current.left
             else:
                 current = current.right
 
         new_node.parent = parent
+        new_node.depth = depth  # Assign the calculated depth to the new node
 
         if parent is None:
             self.root = new_node
@@ -109,7 +120,7 @@ class RedBlackTree:
     def inorder_traversal(self, node):
         if node != self.NIL_LEAF:
             self.inorder_traversal(node.left)
-            print(f'{node.data} ({node.color})', end=' ')
+            print(f'{node.data} ({node.color}, depth={node.depth})', end=' ')
             self.inorder_traversal(node.right)
 
     def visualize(self):
@@ -123,8 +134,9 @@ class RedBlackTree:
 
     def _build_visual(self, node, G, labels):
         if node != self.NIL_LEAF:
+            # Label includes both the data and depth
             G.add_node(node.data, color='red' if node.color == 'RED' else 'black')
-            labels[node.data] = node.data
+            labels[node.data] = f'{node.data} (d={node.depth})'
             if node.left != self.NIL_LEAF:
                 G.add_edge(node.data, node.left.data)
             if node.right != self.NIL_LEAF:
@@ -142,5 +154,5 @@ if __name__ == '__main__':
 
     print("Inorder traversal of the Red-Black Tree:")
     tree.inorder_traversal(tree.root)
-    print("\nVisualizing Red-Black Tree:")
+    print("\nVisualizing Red-Black Tree with Depth Information:")
     tree.visualize()

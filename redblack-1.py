@@ -111,7 +111,7 @@ class RedBlackTree:
 # Example usage of the RedBlackTree class:
 if __name__ == '__main__':
     tree = RedBlackTree()
-    elements = [20, 15, 25, 10, 5, 1, 17, 22, 27,8,99,101,7,2,33,34,35,1,103,77,78,79]
+    elements = [20, 15, 25, 10, 5, 1, 17, 22, 27,8,99,101,7,2,33,34,35,103,77,78,79]
 
     for element in elements:
         tree.insert(element)
