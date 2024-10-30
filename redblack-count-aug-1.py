@@ -1,5 +1,7 @@
-#	1.	Subtree Node Count Augmentation: Each node will track how many nodes exist in the subtree rooted at that node, including itself.
-#	2.	Update Count During Insert and Rotation: Each time we insert a node or perform a rotation, we will update the subtree node counts for the affected nodes.
+#	1.	Subtree Node Count Augmentation: Each node will track how many nodes exist 
+#       in the subtree rooted at that node, including itself.
+#	2.	Update Count During Insert and Rotation: Each time we insert a node or perform a rotation, 
+#       we will update the subtree node counts for the affected nodes.
 #	3.	Subtree Count Formula: The count at each node is 1 + left_subtree_count + right_subtree_count.
 
 import matplotlib.pyplot as plt
@@ -186,7 +188,7 @@ class RedBlackTree:
 # Example usage of the RedBlackTree class:
 if __name__ == '__main__':
     tree = RedBlackTree()
-    elements = [20, 15, 25, 10, 5, 1, 17, 22, 27,8,99,101,7,2,33,34,35,103,77,78,79]
+    elements = [400, 20, 15, 25, 10, 5, 1, 17, 22, 27,8,99,101,7,2,33,34,35,103,77,78,79]
 
     for element in elements:
         tree.insert(element)

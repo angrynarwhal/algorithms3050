@@ -1,17 +1,23 @@
 """ 
-An interval tree is a type of self-balancing tree that stores intervals and allows efficient querying of overlapping intervals. 
-For example, if you’re maintaining time intervals in a scheduling program, an interval tree would allow you to efficiently query 
+An interval tree is a type of self-balancing tree that stores intervals and allows efficient querying of 
+overlapping intervals. 
+For example, if you’re maintaining time intervals in a scheduling program, an interval tree would 
+allow you to efficiently query 
 if any existing intervals overlap with a new one.
 
 Lets adapt the Red-Black Tree we you used before, augmenting it to store intervals instead of single values. 
 Each node in the tree will represent an interval, and the augmented data will include the maximum endpoint of all 
-intervals in the subtree rooted at each node. This allows us to efficiently query whether any intervals overlap with a given interval.
+intervals in the subtree rooted at each node. This allows us to efficiently query whether any intervals overlap
+with a given interval.
 
 Plan:
 
-	1.	Node Structure: Each node stores an interval [low, high] and will be augmented with the maximum endpoint of any interval in its subtree.
-	2.	Insertion: During insertion, the tree is balanced as in a Red-Black Tree, and the augmented data (max endpoint) is updated accordingly.
-	3.	Overlap Query: We’ll add a method to check whether a given interval overlaps with any of the intervals stored in the tree.
+	1.	Node Structure: Each node stores an interval [low, high] and will be augmented with the maximum 
+        endpoint of any interval in its subtree.
+	2.	Insertion: During insertion, the tree is balanced as in a Red-Black Tree, and the augmented 
+        data (max endpoint) is updated accordingly.
+	3.	Overlap Query: We’ll add a method to check whether a given interval overlaps with any of the 
+        intervals stored in the tree.
 
 Interval Overlap Definition:
 
@@ -226,11 +232,11 @@ if __name__ == '__main__':
     tree = IntervalTree()
     
     # List of intervals to insert into the tree (e.g., for a scheduling program)
-    intervals = [(4, 5), (24, 29), (48, 58), (6, 12), (43, 45), (38, 43), 
+    intervals = [(4, 5), (3, 12), (24, 29), (48, 58), (6, 12), (43, 45), (38, 43), 
         (5, 7), (41, 43), (66, 73), (47, 53), (64, 67), (72, 81), 
         (11, 12), (85, 89), (83, 90), (30, 35), (17, 27), (53, 57), 
         (51, 59), (81, 89), (40, 49), (85, 94), (58, 62), (25, 32), 
-        (37, 45), (85, 94), (11, 21), (54, 60)]
+        (37, 45), (85, 94), (11, 21), (54, 60), (12, 17)]
     
     # Insert intervals into the tree
     for interval in intervals:
@@ -243,7 +249,7 @@ if __name__ == '__main__':
     tree.visualize()
 
     # Search for overlapping intervals
-    search_interval = (14, 16)
+    search_interval = (1, 16)
     result = tree.overlap_search(search_interval)
     if result:
         print(f"\nInterval {search_interval} overlaps with {result} in the tree.")
